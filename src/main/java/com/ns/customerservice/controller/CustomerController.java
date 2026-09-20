@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ns.customerservice.entity.Customer;
 import com.ns.customerservice.service.CustomerService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class CustomerController {
 	
@@ -23,12 +25,17 @@ private CustomerController(CustomerService customerService) {
 }
 
 @PostMapping("/customers")
-public Customer createCustomer(@RequestBody Customer customer) {
+public Customer createCustomer(@Valid @RequestBody Customer customer) {
     return customerService.createCustomer(customer);
 }
 @GetMapping("/customers")
 public List<Customer> getcustomer (){
 	return customerService.getcustomer();
+}
+
+@GetMapping("/customers/{id}")
+public Customer getcustomerbyid (@PathVariable Long id) {
+	return customerService.getCustomerById(id);
 }
 
 
