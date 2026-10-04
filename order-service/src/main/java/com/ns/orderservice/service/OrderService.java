@@ -10,15 +10,26 @@ import com.ns.orderservice.repository.OrderRepository;
 public class OrderService {
 
 	private final OrderRepository orderRepository;
+	private final CustomerClient customerClient;
 
-	public OrderService(OrderRepository orderRepository) {
+
+	public OrderService(OrderRepository orderRepository, CustomerClient customerClient) {
 		 
 		this.orderRepository = orderRepository;
+		this.customerClient = customerClient;
 	}
 	
 	
 	public Order CreateOrder (Order order) {
+		if(customerClient.customerExists(order.getCustomerId())) {
 		return orderRepository.save(order);
+		}else {
+			 throw new RuntimeException("Customer not found");
+		}
+	}
+	
+	public boolean customerExists(Long customerId) {
+	    return customerClient.customerExists(customerId);
 	}
 	
 

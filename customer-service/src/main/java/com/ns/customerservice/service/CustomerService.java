@@ -22,6 +22,7 @@ public CustomerService(CustomerRepository customerRepository) {
 
 public Customer createCustomer(Customer customer) {
 	
+	
 	return customerRepository.save(customer);
     // save customer
 }
@@ -68,7 +69,7 @@ public Customer updateCustomer(Long id, Customer customer) {
 
 
 
-//Clearn Approacch
+//Cleaner Approacch
 
 
 public void deleteCustomer(Long id) {
